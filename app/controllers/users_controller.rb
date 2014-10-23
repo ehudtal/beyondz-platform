@@ -2,6 +2,66 @@ class UsersController < ApplicationController
 
   layout 'public'
 
+  before_filter :authenticate_user!, :only => [:reset, :confirm, :save_confirm]
+
+  # This is present to allow an external single sign on server to
+  # authenticate users against our main database. Allows better
+  # integration with the Canvas LMS via RubyCAS at present.
+  def check_credentials
+    user = User.find_for_database_authentication(:email => params[:username])
+    if user.nil?
+      valid = false
+    else
+      valid = user.valid_password?(params[:password])
+    end
+
+    respond_to do |format|
+      format.json { render json: valid }
+    end
+  end
+
+  def confirm
+    # renders a view
+  end
+
+  def save_confirm
+    current_user.program_attendance_confirmed = true
+    current_user.save!
+    redirect_to user_confirm_path
+  end
+
+  def reset
+    u = current_user
+
+    # only want this to happen on test users
+    # via the web interface to protect production data
+    if u.email.starts_with?('test+')
+      u.reset_assignments!
+    end
+
+    redirect_to root_path
+  end
+
+  # This is meant to enable a forced logout from the SSO server, to keep
+  # users sane across different applications. Without something like this,
+  # logging out of say, Canvas, will do it and SSO... but won't clear the
+  # bz.org cookie, so if the user goes back there, they'll show up possible
+  # as a different user, confusing them.
+  #
+  # This has the potential risk of denial-of-service. The check of the referrer
+  # coming from the SSO domain is meant to provide some protection against
+  # random image tags (for example) on other sites logging you out, but it
+  # isn't a perfect solution. Alas, I'm not sure there can be a perfect
+  # solution. Maybe a complex cryptographically signed thing, but meh, I don't
+  # think the risk is that big. The referrer check should foil any pranks
+  # in practice.
+  def clear_session_cookie
+    if request.referer.starts_with?(Rails.application.secrets.sso_url)
+      reset_session
+    end
+    render nothing: true
+  end
+
   def new
     states
     @referrer = request.referrer
@@ -17,6 +77,9 @@ class UsersController < ApplicationController
       :applicant_type,
       :city,
       :state,
+      :interested_joining,
+      :interested_receiving,
+      :interested_partnering,
       :keep_updated)
 
     user[:external_referral_url] = session[:referrer] # the first referrer saw by the app

@@ -20,6 +20,24 @@ module ApplicationHelper
   end
 
   def apply_button
+    if user_signed_in? && current_user.interested_joining
+      '<div class="apply-button">'.html_safe +
+        link_to(
+          '<div class="apply-icon"></div><div class="apply-text">Apply now!</div>'.html_safe,
+          new_enrollment_path
+        ) + '<br />
+      </div>'.html_safe
+    else
+      '<div class="apply-button">'.html_safe +
+      link_to(
+        '<div class="apply-icon"></div><div class="apply-text">SIGN UP TO START YOUR APPLICATION PROCESS</div>'.html_safe,
+        new_user_path
+      ) +
+      '</div>'.html_safe
+    end
+  end
+
+  def join_us_button
     '<div class="apply-button">'.html_safe +
     link_to(
       '<div class="apply-icon"></div><div class="apply-text">JOIN US</div>'.html_safe,
@@ -28,7 +46,7 @@ module ApplicationHelper
     '</div>'.html_safe
   end
 
-  def apply_button_large
+  def join_us_button_large
     '<span class="apply-button-lg">'.html_safe +
     link_to(
       '<div class="apply-icon"></div><br /><span class="apply-text">JOIN US</span>'.html_safe,
@@ -49,19 +67,28 @@ module ApplicationHelper
   def learn_more_link(about, url)
     '<div class="learn-more-link">'.html_safe +
     link_to(
-      '<div class="learn-more-icon"></div><div class="learn-more-text">Learn more about '.html_safe +
+      '<div class="learn-more-text"><div class="learn-more-icon"></div>Learn more about '.html_safe +
       about + '</div>'.html_safe, url
     ) +
     '</div>'.html_safe
   end
 
   def sign_up_link
-    '<div class="sign-up-link">'.html_safe +
-    link_to(
-      '<div class="sign-up-icon"></div><div class="sign-up-text">SIGN UP TO LEARN MORE</div>'.html_safe,
-      new_user_path
-    ) +
-    '</div>'.html_safe
+    if user_signed_in? && current_user.interested_joining
+      '<div class="apply-button">'.html_safe +
+        link_to(
+          '<div class="apply-text"><div class="apply-icon"></div>Apply now!</div>'.html_safe,
+          new_enrollment_path
+        ) + '<br />
+      </div>'.html_safe
+    else
+      '<div class="sign-up-link">'.html_safe +
+      link_to(
+        '<div class="sign-up-text"><div class="sign-up-icon"></div>SIGN UP TO LEARN MORE</div>'.html_safe,
+        new_user_path
+      ) +
+      '</div>'.html_safe
+    end
   end
 
   # Generate standard-sized Bootstrap modal HTML

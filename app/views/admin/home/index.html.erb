@@ -2,9 +2,16 @@
 
 <ul>
   <li><%= link_to 'Users', admin_users_path %></li>
+<<<<<<< HEAD
   <li><%= link_to 'Users Export (csv)', admin_users_path(:format => 'csv') %></li>
   <li><%= link_to 'Users Export (xls)', admin_users_path(:format => 'xls') %></li>
   <li><%= link_to 'Create new user', new_admin_user_path %></li>
+=======
+  <li><%= link_to 'Create Special Canvas User', new_admin_user_path %></li>
+  <li><%= link_to 'Users Export (csv)', admin_users_path(:format => 'csv') %></li>
+  <li><%= link_to 'Users Export (xls)', admin_users_path(:format => 'xls') %></li>
+  <li><%= link_to 'Import user cohort assignment csv', admin_csv_import_path %></li>
+>>>>>>> 816a2beca283a0b66ac0ee6b63a248a9fd50d1ec
 
   <li><%= link_to 'Enrollment Applications', admin_enrollments_path %></li>
   <li><%= link_to 'Applications Export (csv)', admin_enrollments_path(:format => 'csv') %></li>

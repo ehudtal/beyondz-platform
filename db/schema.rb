@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20140813160952) do
+=======
+ActiveRecord::Schema.define(version: 20140918172949) do
+>>>>>>> 816a2beca283a0b66ac0ee6b63a248a9fd50d1ec
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -101,8 +105,11 @@ ActiveRecord::Schema.define(version: 20140813160952) do
     t.boolean  "program_col_col_sjsu"
     t.string   "program_ms"
     t.boolean  "program_ms_ms_epa"
+<<<<<<< HEAD
     t.boolean  "program_ms_ms_brk"
     t.boolean  "program_ms_ms_rlm"
+=======
+>>>>>>> 816a2beca283a0b66ac0ee6b63a248a9fd50d1ec
     t.boolean  "will_be_student"
     t.string   "university"
     t.string   "anticipated_graduation"
@@ -110,7 +117,10 @@ ActiveRecord::Schema.define(version: 20140813160952) do
     t.string   "previous_university"
     t.string   "gpa"
     t.string   "online_resume"
+<<<<<<< HEAD
     t.string   "resume"
+=======
+>>>>>>> 816a2beca283a0b66ac0ee6b63a248a9fd50d1ec
     t.boolean  "bkg_african_americanblack"
     t.boolean  "bkg_asian_american"
     t.boolean  "bkg_latino_or_hispanic"
@@ -132,7 +142,10 @@ ActiveRecord::Schema.define(version: 20140813160952) do
     t.string   "reference_how_long_known"
     t.string   "reference_email"
     t.string   "reference_phone"
+<<<<<<< HEAD
     t.string   "reference2_name"
+=======
+>>>>>>> 816a2beca283a0b66ac0ee6b63a248a9fd50d1ec
     t.string   "reference2_how_known"
     t.string   "reference2_how_long_known"
     t.string   "reference2_email"
@@ -141,17 +154,41 @@ ActiveRecord::Schema.define(version: 20140813160952) do
     t.boolean  "affirm_commit"
     t.string   "time_taken"
     t.text     "gpa_circumstances"
+<<<<<<< HEAD
     t.text     "academic_work_since_undergrad"
+=======
+>>>>>>> 816a2beca283a0b66ac0ee6b63a248a9fd50d1ec
     t.text     "community_connection"
     t.text     "last_summer"
     t.text     "post_graduation_plans"
     t.text     "teaching_experience"
     t.text     "personal_passion"
     t.text     "why_bz"
+<<<<<<< HEAD
     t.text     "community_organization_commitment"
     t.text     "commitments"
     t.text     "cannot_attend"
     t.text     "comments"
+=======
+    t.text     "commitments"
+    t.text     "cannot_attend"
+    t.text     "comments"
+    t.string   "reference2_name",                       limit: 180
+    t.text     "other_meaningful_volunteer_activities"
+    t.text     "current_volunteer_activities"
+    t.text     "meaningful_experience"
+    t.string   "languages"
+    t.boolean  "program_ms_ms_nyc"
+    t.boolean  "program_ms_ms_mp"
+    t.string   "grad_school"
+    t.string   "grad_degree"
+    t.string   "anticipated_grad_school_graduation"
+    t.boolean  "explicitly_submitted"
+    t.string   "resume_file_name"
+    t.string   "resume_content_type"
+    t.integer  "resume_file_size"
+    t.datetime "resume_updated_at"
+>>>>>>> 816a2beca283a0b66ac0ee6b63a248a9fd50d1ec
   end
 
   add_index "enrollments", ["user_id"], name: "index_enrollments_on_user_id", using: :btree
@@ -269,11 +306,11 @@ ActiveRecord::Schema.define(version: 20140813160952) do
     t.string   "first_name"
     t.string   "last_name"
     t.boolean  "is_administrator"
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "encrypted_password",                  default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",                       default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -291,6 +328,17 @@ ActiveRecord::Schema.define(version: 20140813160952) do
     t.string   "university_name"
     t.string   "external_referral_url"
     t.string   "internal_referral_url"
+    t.boolean  "interested_joining"
+    t.boolean  "interested_partnering"
+    t.boolean  "interested_receiving"
+    t.boolean  "acceptance_requested"
+    t.boolean  "accepted_into_program"
+    t.boolean  "declined_from_program"
+    t.boolean  "fast_tracked"
+    t.boolean  "program_attendance_confirmed"
+    t.boolean  "interview_scheduled"
+    t.boolean  "availability_confirmation_requested"
+    t.integer  "canvas_user_id"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree

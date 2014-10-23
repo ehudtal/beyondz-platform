@@ -79,7 +79,22 @@ For the secret and pepper variables above, you can generate them using
 ```Shell
 rake secret
 ```
+<<<<<<< HEAD
 
+=======
+
+## Integrating with Canvas
+Five environment variables relate to using the Canvas LMS through its REST API:
+
+CANVAS_ACCESS_TOKEN=<token created in canvas admin for app integration>
+CANVAS_SERVER=<domain of canvas server>
+CANVAS_PORT=<port of canvas server>
+CANVAS_USE_SSL=<true or false>
+CANVAS_ALLOW_SELF_SIGNED_SSL=<true or false>
+
+These are self explanatory except for the canvas access token. To create one of these, log into Canvas as the admin user and click settings (upper right corner of the screen). Scroll down to "Approved Integrations" and generate a new access token. That is the value needed for CANVAS_ACCESS_TOKEN.
+
+>>>>>>> 816a2beca283a0b66ac0ee6b63a248a9fd50d1ec
 ## Running the Application 
 From the directory you cloned your repo to run:
 ```Shell
@@ -92,6 +107,7 @@ Finally, start the application by running
 foreman start
 ```
 The app will be available at [http://localhost:5000](http://localhost:5000) by default
+<<<<<<< HEAD
 
 ## Testing
 We have created a few test users that you can login to the platform with.  They are populated using the `rake db:seed` task.
@@ -109,6 +125,25 @@ We have created a few test users that you can login to the platform with.  They 
 
 Here is a [nice overview](http://nathanhoad.net/git-workflow-forks-remotes-and-pull-requests) of the workflow we follow, which is also detailed below.
 
+=======
+
+## Testing
+We have created a few test users that you can login to the platform with.  They are populated using the `rake db:seed` task.
+
+    username: test+student1@beyondz.org
+    password: test
+
+    username: test+coach1@beyondz.org
+    password: test
+
+    username: test+admin@beyondz.org
+    password: test
+
+## Development Process
+
+Here is a [nice overview](http://nathanhoad.net/git-workflow-forks-remotes-and-pull-requests) of the workflow we follow, which is also detailed below.
+
+>>>>>>> 816a2beca283a0b66ac0ee6b63a248a9fd50d1ec
 ### Setup
 Make the upstream (the original) repo available for merging into your local fork so that you always can get the most up-to-date code:
 ```Shell
@@ -390,6 +425,9 @@ Structure CSS files according to the ![asset management guide](app/assets/asset_
 	}
   	```
   
+  * See https://www.dropbox.com/s/hzy0mt1jeh4ns4t/bz-colors-02.pdf for our color palette documentation. The palette code is found in app/assets/stylesheet/base/palettes/_primary.css.scss
+
+  * Body text will use only white or dark gray (or extra dark): see txt-dk and txt-lt in code. Links will only use shades of blue. link-* in code. Brand orange is reserved primarily for CTA (call to action) buttons/areas. Three colors and grays give a total of 15 swatches (+2 for extra light/dark text). cta* in code.
 
 ## JavaScript
 

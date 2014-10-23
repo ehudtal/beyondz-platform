@@ -8,8 +8,10 @@ class HomeController < ApplicationController
     if current_user
       if current_user.is_administrator?
         redirect_to admin_root_path
+      elsif current_user.in_lms?
+        redirect_to "//#{Rails.application.secrets.canvas_server}/"
       elsif current_user.coach?
-        redirect_to coach_root_path
+        redirect_to coaches_root_path
       elsif current_user.student?
         redirect_to assignments_path
       else
@@ -25,6 +27,14 @@ class HomeController < ApplicationController
   end
 
   def welcome
+    if user_signed_in?
+      existing_enrollment = Enrollment.find_by(:user_id => current_user.id)
+      unless existing_enrollment.nil?
+        if existing_enrollment.explicitly_submitted
+          @application_received = true
+        end
+      end
+    end
   end
 
   def volunteer
@@ -45,7 +55,9 @@ class HomeController < ApplicationController
   private
 
   def new_user
-    if params[:new_user_id]
+    if user_signed_in?
+      @new_user = current_user
+    elsif params[:new_user_id]
       @new_user = User.find(params[:new_user_id])
     end
   end
